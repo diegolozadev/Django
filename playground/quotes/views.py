@@ -13,6 +13,18 @@ days_of_week = {
     "sunday": "Aprovecha el día",
 }
 
+def index(request):
+    list_items = ""
+    days = list(days_of_week.keys())
+
+    for day in days:
+        day_path = reverse("day-quote", args=[day])
+        list_items += f"<li><a href='{day_path}'>{day}</a></li>"
+    
+    response_html = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_html)
+
+
 def days_week_with_number(request, day):
     days = list(days_of_week.keys())
     if day > len(days):
@@ -21,7 +33,7 @@ def days_week_with_number(request, day):
     redirect_path = reverse("day-quote", args=[redirect_day])
     return HttpResponseRedirect(redirect_path)
     
-    
+
 def days_week(request, day):
     try:
         quote_text = days_of_week[day]
