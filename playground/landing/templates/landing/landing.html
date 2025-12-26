@@ -6,7 +6,25 @@
     <title>Hola mundo</title>
 </head>
 <body>
-    <h1>Hola mundo desde template</h1>
-    <h2>Diego el crack</h2>
+
+    {% if name == "diego"  %}
+        <h1>Hola, {{ name }}</h1>
+    {% elif name == "fernando" %}
+        <h1>Hola, {{ name }}</h1>
+    {% else %}
+        <h1>Hola, desconocido</h1>
+    {% endif %}
+
+    <h3>Stack de mis tecnologías:</h3>
+    <ul>
+        {% for tool in stack  %}
+            <li><a href="{% url 'stack' tool.id %}">{{ tool.name }}</a></li>
+        {% empty %}
+            <li>No hay tecnologías</li>
+        {% endfor %}
+    </ul>
+    
+    <p>Hoy es: {{ today | date:"d/m/Y"}}</p>
+
 </body>
 </html>
