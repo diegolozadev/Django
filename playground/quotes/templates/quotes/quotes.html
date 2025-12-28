@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
-{% block title %}
-    Listado de Quotes
-{% endblock title %}
+{% block title %} Listado de Quotes {% endblock title %}
+
+{% block page_style %} <link rel="stylesheet" href="{% static 'quotes/quotes_style.css' %}"> {% endblock page_style %} 
     
-
 {% block content %}
-    <h1>Home page Quotes</h1>
+    {% include './includes/partial.html' %}
 
     <ul>
         
@@ -16,7 +16,8 @@
         {% endfor %}
             
     </ul>
-        
+    
+    {% include './includes/endpartial.html' with days=days %}
     
 {% endblock content %}
     
