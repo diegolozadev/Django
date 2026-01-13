@@ -42,6 +42,10 @@ class BookDetail(models.Model):
     book = models.OneToOneField(
         Book, on_delete=models.CASCADE, related_name='detail')
     
+    class Meta:
+        verbose_name = "Detalles Libro"
+        verbose_name_plural = "Detalles Libros"
+    
     def __str__(self):
         return self.summary
     
@@ -67,6 +71,10 @@ class Loan(models.Model):
     loan_date = models.DateTimeField(auto_now_add=True)
     return_date = models.DateTimeField(null=True, blank=True)
     is_returned = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Prestamo"
+        verbose_name_plural = "Prestamos"
 
     def __str__(self):
         return f"{self.user} -> {self.book.title} ({'Devuelto' if self.is_returned else 'Prestado'})"
