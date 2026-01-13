@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minilibrary</title>
+</head>
+<body>
+
+    <h1>Minilibrary page</h1>
+    <h2>Holis</h2>
+    <h3>{{ text }}</h3>
+    <p>{{ name }}</p>
+    <p>{{ author }}</p>
+
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} - {{ book.author.name }}</li>
+        {% empty %}
+            <li>No books available.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
