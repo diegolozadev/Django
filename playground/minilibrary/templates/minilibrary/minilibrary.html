@@ -8,18 +8,38 @@
 <body>
 
     <h1>Minilibrary page</h1>
-    <h2>Holis</h2>
-    <h3>{{ text }}</h3>
-    <p>{{ name }}</p>
-    <p>{{ author }}</p>
+    <form method="get">
+        <input type="text" name="query_search" placeholder="Buscar libro..." value="{% if query %} {{ query }} {% endif %}">
+        <input type="date" name="start" value={{request.GET.start}}>
+        <input type="date" name="end" value={{request.GET.end}}>
+        <button type="submit">Enviar</button>
+    </form>
 
     <ul>
-        {% for book in books %}
-            <li>{{ book.title }} - {{ book.author.name }}</li>
+        {% for book in page_obj %}
+            <li>{{ book.title }} - {{ book.author.name }} - {{ book.publication_date}}</li>
         {% empty %}
             <li>No books available.</li>
         {% endfor %}
     </ul>
+
+    <div>
+        
+        {% if page_obj.has_previous %}
+            <a href="?page=1&{{query_string}}">Primera</a>
+            <a href="?page={{page_obj.previous_page_number}}&{{query_string}}">Anterior</a>
+        {% endif %}
+
+        <span>Página {{page_obj.number}} de {{page_obj.paginator.num_pages}}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}&{{query_string}}">Siguiente</a>
+            <a href="?page={{page_obj.paginator.num_pages}}&{{query_string}}">Última</a>
+        {% endif %}
+
+
+            
+    </div>
 
 </body>
 </html>
